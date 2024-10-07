@@ -19,13 +19,13 @@ class PersonCreate(PersonBaseModel):
 
 class PersonDisplay(PersonBaseModel):
     id: int
-    created_at: datetime 
-    updated_at: datetime
+    created_at: Optional[datetime] = None 
+    updated_at: Optional[datetime] = None 
     is_deleted: bool | None = False
         
     model_config = {
         'from_attributes': True
-    }
+    }   
     
 class PersonUpdate(PersonBaseModel):
     password: Optional[str] = Field(None, min_length=6, max_length=16)
