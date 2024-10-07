@@ -3,38 +3,37 @@ from typing import cast ,Tuple
 
 from app.core.use_cases.use_case import BaseUseCase
 from app.core.util.id_manager import UniqueID
-from app.features.student.domain.entities.student_entity import StudentEntity
-from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.domain.repository.student_unite_of_work import StudentUnitOfWork
+from app.features.teacher.domain.entities.teacher_entity import TeacherEntity
+from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
+from app.features.teacher.domain.repository.teacher_unite_of_work import TeacherUnitOfWork
 from app.core.enum.object_type_str import ObjectToSTR
-from app.core.error.student_exception import StudentNotFoundError, StudentIsDeleted
-from app.features.student.data.model.convert_student import ConvertStudent
-from app.core.error.invalid_operation_exception import InvalidOperationError
+from app.core.error.teacher_exception import TeacherNotFoundError, TeacherIsDeleted
+from app.features.teacher.data.model.convert_teacher import ConvertTeacher
 
-class DeleteStudentUseCase(BaseUseCase[Tuple[int], StudentDisplay]):
-    uow: StudentUnitOfWork
+class DeleteTeacherUseCase(BaseUseCase[Tuple[int], TeacherDisplay]):
+    uow: TeacherUnitOfWork
 
     @abstractmethod
-    def __call__(self, args: Tuple[int]) -> StudentDisplay:
+    def __call__(self, args: Tuple[int]) -> TeacherDisplay:
         raise NotImplementedError()
 
-class DeleteStudentUseCaseImpl(DeleteStudentUseCase):
-    def __init__(self, uow: StudentUnitOfWork, unique_id: UniqueID):
-        self.uow: StudentUnitOfWork = uow
+class DeleteTeacherUseCaseImpl(DeleteTeacherUseCase):
+    def __init__(self, uow: TeacherUnitOfWork, unique_id: UniqueID):
+        self.uow: TeacherUnitOfWork = uow
         self.unique_id: UniqueID = unique_id
 
-    async def __call__(self, args: Tuple[int]) -> StudentDisplay:
+    async def __call__(self, args: Tuple[int]) -> TeacherDisplay:
         id = args[0]
         existing_stu_db = await self.uow.repository.find_object_by_id(id)
         
         if existing_stu_db is None:
-            raise StudentNotFoundError()
+            raise TeacherNotFoundError()
         
         existing_stu_entity = self.uow.repository.to_entity(existing_stu_db)
         
         try:
             if existing_stu_db.is_deleted:
-                raise StudentIsDeleted()
+                raise TeacherIsDeleted()
                         
             marked_stu_entity = existing_stu_entity.mark_entity_as_deleted()
             marked_stu_db = self.uow.repository.from_entity(marked_stu_entity)

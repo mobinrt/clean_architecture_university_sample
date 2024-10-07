@@ -1,34 +1,34 @@
 from fastapi import Depends, HTTPException, status
 
-from app.core.error.student_exception import StudentNotFoundError, StudentIsDeleted
-from app.features.student.dependencies import get_delete_student_use_case
-from app.features.student.domain.usecase.delete_student import DeleteStudentUseCase
-from app.features.student.presentation.routes import router
-from app.features.student.presentation.schemas.student_error_msg import ErrorMSGStudentNotFound, ErrorMSGStudentIsDeleted
-from app.features.student.domain.entities.student_schema import StudentDisplay
+from app.core.error.teacher_exception import TeacherNotFoundError, TeacherIsDeleted
+from app.features.teacher.dependencies import get_delete_teacher_use_case
+from app.features.teacher.domain.usecase.delete_teacher import DeleteTeacherUseCase
+from app.features.teacher.presentation.routes import router
+from app.features.teacher.presentation.schemas.teacher_error_msg import ErrorMSGTeacherNotFound, ErrorMSGTeacherIsDeleted
+from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
 
 @router.delete('/{id}', 
-            response_model=StudentDisplay,
+            response_model=TeacherDisplay,
             status_code=status.HTTP_200_OK, 
             responses={
             status.HTTP_404_NOT_FOUND: {
-                'model': ErrorMSGStudentNotFound
+                'model': ErrorMSGTeacherNotFound
             },
             status.HTTP_400_BAD_REQUEST: {
-                'model': ErrorMSGStudentIsDeleted
+                'model': ErrorMSGTeacherIsDeleted
             },
             
         },
     )
-async def delete_student(id: int, delete_student_use_case: DeleteStudentUseCase = Depends(get_delete_student_use_case)):
+async def delete_teacher(id: int, delete_teacher_use_case: DeleteTeacherUseCase = Depends(get_delete_teacher_use_case)):
     try:
-        del_student = await delete_student_use_case((id, ))
-    except StudentNotFoundError as e:
+        del_teacher = await delete_teacher_use_case((id, ))
+    except TeacherNotFoundError as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message
         )
-    except StudentIsDeleted as ex:
+    except TeacherIsDeleted as ex:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=ex.message
@@ -40,4 +40,4 @@ async def delete_student(id: int, delete_student_use_case: DeleteStudentUseCase 
             detail=_e.message
         )
         
-    return del_student
+    return del_teacher

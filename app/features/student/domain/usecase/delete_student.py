@@ -9,7 +9,6 @@ from app.features.student.domain.repository.student_unite_of_work import Student
 from app.core.enum.object_type_str import ObjectToSTR
 from app.core.error.student_exception import StudentNotFoundError, StudentIsDeleted
 from app.features.student.data.model.convert_student import ConvertStudent
-from app.core.error.invalid_operation_exception import InvalidOperationError
 
 class DeleteStudentUseCase(BaseUseCase[Tuple[int], StudentDisplay]):
     uow: StudentUnitOfWork

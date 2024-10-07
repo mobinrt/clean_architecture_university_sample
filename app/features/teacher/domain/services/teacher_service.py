@@ -1,9 +1,8 @@
 from abc import ABC
 
 from app.core.services.entity_services import EntityServices
-from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.data.model import StudentModel
-from ..entities import StudentDisplay
+from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
+from app.features.teacher.data.model import TeacherModel
 
-class StudentService(EntityServices[StudentDisplay, StudentModel]):
+class TeacherService(EntityServices[TeacherDisplay, TeacherModel]):
     pass

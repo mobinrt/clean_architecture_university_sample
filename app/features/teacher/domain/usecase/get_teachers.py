@@ -2,27 +2,27 @@ from abc import abstractmethod
 from typing import Sequence
 
 from app.core.use_cases.use_case import BaseUseCase
-from app.core.error.student_exception import StudentsNotFoundError
-from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.domain.services.student_service import StudentService
+from app.core.error.teacher_exception import TeachersNotFoundError
+from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
+from app.features.teacher.domain.services.teacher_service import TeacherService
 
-class GetStudentsUsecase(BaseUseCase[None, Sequence[StudentDisplay]]):       #use Tuple or not??
-    service: StudentService
+class GetTeachersUsecase(BaseUseCase[None, Sequence[TeacherDisplay]]):       #use Tuple or not??
+    service: TeacherService
     
     @abstractmethod
-    async def __call__(self, args: None = None) -> Sequence[StudentDisplay]:
+    async def __call__(self, args: None = None) -> Sequence[TeacherDisplay]:
         raise NotImplementedError()
     
-class GetStudentsUsecaseImp(GetStudentsUsecase):
-    def __init__(self, service: StudentService):
-        self.service: StudentService = service
+class GetTeachersUsecaseImp(GetTeachersUsecase):
+    def __init__(self, service: TeacherService):
+        self.service: TeacherService = service
 
-    async def __call__(self, args: None = None) -> Sequence[StudentDisplay]:
+    async def __call__(self, args: None = None) -> Sequence[TeacherDisplay]:
         try:
-            students = await self.service.find_all_objects()
-            if not students:
-                raise StudentsNotFoundError()
+            teachers = await self.service.find_all_objects()
+            if not teachers:
+                raise TeachersNotFoundError()
             
-            return students
+            return teachers
         except Exception as e:
             raise e

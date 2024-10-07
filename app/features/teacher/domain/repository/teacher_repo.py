@@ -1,16 +1,10 @@
 from abc import abstractmethod
 
 from app.entity_repository.entity_repo import EntityRepo
-from app.features.student.domain.entities.student_entity import StudentEntity
-from app.features.student.data.model import StudentModel
-class StudentRepository(EntityRepo[StudentEntity]):
+from app.features.teacher.domain.entities.teacher_entity import TeacherEntity
+from app.features.teacher.data.model import TeacherModel
+class TeacherRepository(EntityRepo[TeacherEntity]):
 
     @abstractmethod
-    async def enroll_student_in_course(self, course_id: int, student_id: int) -> StudentEntity | None:    
+    async def fired_students_from_course(self, course_id: int, student_id: int, current_user: TeacherModel):    
         raise NotImplementedError()
-
-    '''
-    @abstractmethod
-    async def delete_mark(self, id: int) -> StudentEntity | None:
-        raise NotImplementedError()
-    '''

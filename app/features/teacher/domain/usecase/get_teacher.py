@@ -2,29 +2,29 @@ from abc import abstractmethod
 from typing import Tuple
 
 from app.core.use_cases.use_case import BaseUseCase
-from app.core.error.student_exception import StudentNotFoundError
-from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.domain.services.student_service import StudentService
+from app.core.error.teacher_exception import TeacherNotFoundError
+from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
+from app.features.teacher.domain.services.teacher_service import TeacherService
 
-class GetStudentUsecase(BaseUseCase[Tuple[int], StudentDisplay]):       #use Tuple or not??
-    serivce: StudentService
+class GetTeacherUsecase(BaseUseCase[Tuple[int], TeacherDisplay]):
+    serivce: TeacherService
     
     @abstractmethod
-    async def __call__(self, args: Tuple[int]) -> StudentDisplay:
+    async def __call__(self, args: Tuple[int]) -> TeacherDisplay:
         raise NotImplementedError()
     
-class GetStudentUsecaseImp(GetStudentUsecase):
-    def __init__(self, service: StudentService):
-        self.service: StudentService = service
+class GetTeacherUsecaseImp(GetTeacherUsecase):
+    def __init__(self, service: TeacherService):
+        self.service: TeacherService = service
 
-    async def __call__(self, args: Tuple[int]) -> StudentDisplay:
+    async def __call__(self, args: Tuple[int]) -> TeacherDisplay:
         id = args[0]
 
         try:
-            student = await self.service.find_object_by_id(id)
-            if not student:
-                raise StudentNotFoundError()
+            teacher = await self.service.find_object_by_id(id)
+            if not teacher:
+                raise TeacherNotFoundError()
             
-            return student
+            return teacher
         except Exception as e:
             raise e
