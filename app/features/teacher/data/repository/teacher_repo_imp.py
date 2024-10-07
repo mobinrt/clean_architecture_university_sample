@@ -1,7 +1,7 @@
 from ..model import StudentModel, student_course_association
-from ...domain.repository.student_repo import StudentRepository
-from ...domain.entities.student_schema import StudentCreate
-from ...domain.entities.student_entity import StudentEntity
+from ...domain.repository import StudentRepository
+from ...domain.entities import StudentCreate
+from ...domain.entities import StudentEntity
 from app.features.student.data.model.convert_student import ConvertStudent
 
 from sqlalchemy.ext.asyncio import AsyncSession

@@ -1,7 +1,7 @@
 from .teacher import TeacherModel
 from app.core.models.convert_entity import ConvertEntity
 from app.features.teacher.domain.entities.teacher_entity import TeacherEntity
-
+from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
 class ConvertTeacher(ConvertEntity):
     
     @staticmethod
@@ -27,11 +27,10 @@ class ConvertTeacher(ConvertEntity):
         }
     
     @staticmethod
-    def to_read_model(teacher_model: TeacherModel) -> TeacherEntity:
-        return TeacherEntity(
+    def to_read_model(teacher_model: TeacherModel) -> TeacherDisplay:
+        return TeacherDisplay(
             id=teacher_model.id,
             name=teacher_model.name,
-            password=teacher_model.password,
             is_deleted=teacher_model.is_deleted,
             created_at=teacher_model.created_at,
             updated_at=teacher_model.updated_at,

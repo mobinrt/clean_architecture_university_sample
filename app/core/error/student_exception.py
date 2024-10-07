@@ -14,3 +14,6 @@ class StudentAlreadyExistsError(BaseError):
 
 class StudentNameValid(BaseError):
     message = 'Username should not be blank!'
+    
+class StudentIsDeleted(BaseError):
+    message = 'Student is already marked as deleted'

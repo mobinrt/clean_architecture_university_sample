@@ -2,7 +2,8 @@ import copy
 from datetime import datetime
 from typing import Any, Callable, TYPE_CHECKING
 
-from app.core.error.invalid_operation_exception import InvalidOperationError
+from app.features.student.data.model import StudentModel
+from app.core.error.student_exception import StudentIsDeleted
 from app.core.enum.major import Major
 from app.features.student.domain.entities.student_schema import StudentUpdate
 from app.core.util import hash
@@ -40,11 +41,12 @@ class StudentEntity(object):        #TODO: set father for entities
 
     def mark_entity_as_deleted(self) -> 'StudentEntity':
         if self.is_deleted:
-            raise InvalidOperationError('Student is already marked as deleted')
-
-        self.is_deleted = True
-
-        return self
+            raise StudentIsDeleted()
+        
+        marked_entity = copy.deepcopy(self)
+        marked_entity.is_deleted = True
+        
+        return marked_entity
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, StudentEntity):
