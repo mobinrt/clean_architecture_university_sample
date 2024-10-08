@@ -2,12 +2,12 @@ from sqlalchemy.orm import Session
 
 from app.features.student.domain.repository.student_repo import StudentRepository
 from app.features.student.domain.repository.student_unite_of_work import StudentUnitOfWork
-
+from app.features.student.domain.services.student_service import StudentService
 
 class StudentUnitOfWorkImp(StudentUnitOfWork):
     
-    def __init__(self, session: Session, student_repository: StudentRepository):
-        super().__init__(session, student_repository)
+    def __init__(self, session: Session, student_repository: StudentRepository, student_service: StudentService):
+        super().__init__(session, student_repository, student_service)
         
     async def begin(self):
         self.session = self.session

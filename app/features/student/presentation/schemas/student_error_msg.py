@@ -4,8 +4,8 @@ from app.core.error.student_exception import (
     StudentNotFoundError,
     StudentsNotFoundError,
     StudentAlreadyExistsError,
-    StudentNameValid,
-    StudentIsDeleted
+    StudentNameValidError,
+    StudentIsDeletedError
 )
 
 
@@ -22,7 +22,7 @@ class ErrorMSGStudentAlreadyExists(BaseModel):
 
 
 class ErrorMSGStudentNameNotValid(BaseModel):
-    detail: str = Field(example=StudentNameValid.message)
+    detail: str = Field(example=StudentNameValidError.message)
 
 class ErrorMSGStudentIsDeleted(BaseModel):
-    detail: str = Field(example=StudentIsDeleted.message)
+    detail: str = Field(example=StudentIsDeletedError.message)

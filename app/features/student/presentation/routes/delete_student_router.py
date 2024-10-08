@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException, status
 
-from app.core.error.student_exception import StudentNotFoundError, StudentIsDeleted
+from app.core.error.student_exception import StudentNotFoundError, StudentIsDeletedError
 from app.features.student.dependencies import get_delete_student_use_case
 from app.features.student.domain.usecase.delete_student import DeleteStudentUseCase
 from app.features.student.presentation.routes import router
@@ -28,7 +28,7 @@ async def delete_student(id: int, delete_student_use_case: DeleteStudentUseCase 
             status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message
         )
-    except StudentIsDeleted as ex:
+    except StudentIsDeletedError as ex:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=ex.message

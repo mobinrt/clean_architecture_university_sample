@@ -12,8 +12,8 @@ class StudentsNotFoundError(BaseError):
 class StudentAlreadyExistsError(BaseError):
     message = 'Student already exists!'
 
-class StudentNameValid(BaseError):
+class StudentNameValidError(BaseError):
     message = 'Username should not be blank!'
     
-class StudentIsDeleted(BaseError):
+class StudentIsDeletedError(BaseError):
     message = 'Student is already marked as deleted'

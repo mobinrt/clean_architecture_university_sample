@@ -6,13 +6,15 @@ from app.core.util.id_manager import UniqueID
 from app.core.enum.object_type_str import ObjectToSTR
 
 class GetHashTableForTeacherUseCase(BaseUseCase[None, dict]):
+    unique_id: UniqueID
+    
     @abstractmethod
     async def __call__(self) -> dict:
         raise NotImplementedError()
 
 class GetHashTableForTeacherUseCaseImp(GetHashTableForTeacherUseCase):
     def __init__(self, unique_id: UniqueID):
-        self.unique_id = unique_id
+        self.unique_id: UniqueID = unique_id
 
     async def __call__(self) -> dict:
         try:

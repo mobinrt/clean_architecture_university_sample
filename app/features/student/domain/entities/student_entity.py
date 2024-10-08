@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Any, Callable, TYPE_CHECKING
 
 from app.features.student.data.model import StudentModel
-from app.core.error.student_exception import StudentIsDeleted
+from app.core.error.student_exception import StudentIsDeletedError
 from app.core.enum.major import Major
 from app.features.student.domain.entities.student_schema import StudentUpdate
 from app.core.util import hash
@@ -41,7 +41,7 @@ class StudentEntity(object):        #TODO: set father for entities
 
     def mark_entity_as_deleted(self) -> 'StudentEntity':
         if self.is_deleted:
-            raise StudentIsDeleted()
+            raise StudentIsDeletedError()
         
         marked_entity = copy.deepcopy(self)
         marked_entity.is_deleted = True

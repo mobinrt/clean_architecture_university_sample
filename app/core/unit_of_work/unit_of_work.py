@@ -1,13 +1,14 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
-_T = TypeVar('_T')
+_R = TypeVar('_R')
+_S = TypeVar('_S')
 
+class AbstractUnitOfWork(ABC, Generic[_R, _S]):
 
-class AbstractUnitOfWork(ABC, Generic[_T]):
-
-    repository: _T
-
+    repository: _R
+    service: _S
+    
     @abstractmethod
     async def begin(self):
         raise NotImplementedError()

@@ -7,6 +7,7 @@ from app.features.classroom.domain.entities.classroom_entity import ClassroomEnt
 from app.features.classroom.domain.repository.classroom_unite_of_work import ClassroomUnitOfWork
 from app.features.classroom.data.model.convert_classroom import ConvertClassroom
 from app.core.error.classroom_exception import ClassroomNumberValid, ClassroomAlreadyExistsError
+
 class CreateClassroomUseCase(BaseUseCase[Tuple[ClassroomCreate], ClassroomDisplay]):
     uow: ClassroomUnitOfWork
 

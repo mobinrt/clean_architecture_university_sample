@@ -24,8 +24,9 @@ async def get_classroom_serivce(session: Session = Depends(db.get_session)) -> C
 async def get_classroom_unit_of_work(
     session: Session = Depends(db.get_session),
     classroom_repository: ClassroomRepository = Depends(get_classroom_repository),
+    classroom_service: ClassroomService = Depends(get_classroom_serivce),
 ) -> ClassroomUnitOfWork:
-    return ClassroomUnitOfWorkImp(session, classroom_repository)
+    return ClassroomUnitOfWorkImp(session, classroom_repository, classroom_service)
 
 async def get_create_classroom_use_case(
     unit_of_work: ClassroomUnitOfWork = Depends(get_classroom_unit_of_work),

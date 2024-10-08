@@ -10,7 +10,7 @@ from app.features.student.domain.repository.student_unite_of_work import Student
 from app.core.enum.object_type_digit import ObjectDigits
 from app.core.enum.object_type_str import ObjectToSTR
 from app.core.util import hash
-from app.core.error.student_exception import StudentNameValid
+from app.core.error.student_exception import StudentNameValidError
 from app.features.student.data.model.convert_student import ConvertStudent
 
 class CreateStudentUseCase(BaseUseCase[Tuple[StudentCreate], StudentDisplay]):
@@ -29,7 +29,7 @@ class CreateStudentUseCaseImp(CreateStudentUseCase):
         data = args[0]
         
         if not data.name:
-            raise StudentNameValid()
+            raise StudentNameValidError()
             
         stu_id = self.unique_id.insert(ObjectDigits.STUDENT.value, ObjectToSTR.STUDENT.value)
         hashed_password = hash.get_password_hash(data.password)

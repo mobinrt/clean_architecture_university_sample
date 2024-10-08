@@ -6,6 +6,7 @@ from app.core.enum.object_type_str import ObjectToSTR
 from app.core.error.student_exception import StudentsNotFoundError
 
 class GetHashTableForStudentUseCase(BaseUseCase[None, dict]):
+    unique_id: UniqueID
     @abstractmethod
     async def __call__(self) -> dict:
         raise NotImplementedError()
@@ -13,7 +14,7 @@ class GetHashTableForStudentUseCase(BaseUseCase[None, dict]):
 
 class GetHashTableForStudentUseCaseImp(GetHashTableForStudentUseCase):
     def __init__(self, unique_id: UniqueID):
-        self.unique_id = unique_id
+        self.unique_id: UniqueID = unique_id
 
     async def __call__(self) -> dict:
         try:

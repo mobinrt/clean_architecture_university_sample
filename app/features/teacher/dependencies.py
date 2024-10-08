@@ -26,8 +26,9 @@ async def get_teacher_serivce(session: Session = Depends(db.get_session)) -> Tea
 async def get_teacher_unit_of_work(
     session: Session = Depends(db.get_session),
     teacher_repository: TeacherRepository = Depends(get_teacher_repository),
+    teacher_service: TeacherService = Depends(get_teacher_serivce)
 ) -> TeacherUnitOfWork:
-    return TeacherUnitOfWorkImp(session, teacher_repository)
+    return TeacherUnitOfWorkImp(session, teacher_repository, teacher_service)
 
 async def get_create_teacher_use_case(
     unit_of_work: TeacherUnitOfWork = Depends(get_teacher_unit_of_work),

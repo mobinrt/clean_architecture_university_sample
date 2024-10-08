@@ -7,7 +7,7 @@ from app.features.student.domain.entities.student_entity import StudentEntity
 from app.features.student.domain.entities.student_schema import StudentDisplay
 from app.features.student.domain.repository.student_unite_of_work import StudentUnitOfWork
 from app.core.enum.object_type_str import ObjectToSTR
-from app.core.error.student_exception import StudentNotFoundError, StudentIsDeleted
+from app.core.error.student_exception import StudentNotFoundError, StudentIsDeletedError
 from app.features.student.data.model.convert_student import ConvertStudent
 
 class DeleteStudentUseCase(BaseUseCase[Tuple[int], StudentDisplay]):
@@ -33,7 +33,7 @@ class DeleteStudentUseCaseImpl(DeleteStudentUseCase):
         
         try:
             if existing_stu_db.is_deleted:
-                raise StudentIsDeleted()
+                raise StudentIsDeletedError()
                         
             marked_stu_entity = existing_stu_entity.mark_entity_as_deleted()
             marked_stu_db = self.uow.repository.from_entity(marked_stu_entity)

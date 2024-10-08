@@ -25,8 +25,9 @@ async def get_student_serivce(session: Session = Depends(db.get_session)) -> Stu
 async def get_student_unit_of_work(
     session: Session = Depends(db.get_session),
     student_repository: StudentRepository = Depends(get_student_repository),
+    student_service: StudentService = Depends(get_student_serivce),
 ) -> StudentUnitOfWork:
-    return StudentUnitOfWorkImp(session, student_repository)
+    return StudentUnitOfWorkImp(session, student_repository, student_service)
 
 async def get_create_student_use_case(
     unit_of_work: StudentUnitOfWork = Depends(get_student_unit_of_work),

@@ -1,0 +1,33 @@
+from ..model import CourseModel
+from ...domain.repository.course_repo import CourseRepository
+from ...domain.entities.course_schema import CourseCreate
+from ...domain.entities.course_entity import CourseEntity
+from app.features.course.data.model.convert_course import ConvertCourse
+
+from sqlalchemy.ext.asyncio import AsyncSession
+
+class CourseRepositoryImp(CourseRepository):
+    def __init__(self, session: AsyncSession):
+        super().__init__(session, CourseModel)
+    
+    def to_entity(self, model_instance: CourseModel) -> CourseEntity:
+        return ConvertCourse.to_entity(model_instance)
+
+    def from_entity(self, entity: CourseEntity) -> CourseModel:
+        return ConvertCourse.from_entity(entity)
+        
+    async def create_object(self, new_course: CourseCreate, course_id: int):
+        new_course.id = course_id
+        model_instance = self.from_entity(new_course)
+        self.session.add(model_instance)
+        return self.to_entity(model_instance)
+    
+    '''
+    async def delete_mark(self, id: int) -> CourseEntity | None:
+        existing_course_entity = await self.find_object_by_id(id)
+        course_db = self.from_entity(existing_course_entity)
+        
+        self.session.add(course_db)
+        await self.session.commit()
+        return self.to_entity(course_db)
+    '''
