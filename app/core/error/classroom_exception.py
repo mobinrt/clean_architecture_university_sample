@@ -7,7 +7,6 @@ class ClassroomNotFoundError(BaseError):
 class ClassroomsNotFoundError(BaseError):
     message = 'Classrooms do not exist'
 
-
 class ClassroomAlreadyExistsError(BaseError):
     message = 'Classroom already exists'
 

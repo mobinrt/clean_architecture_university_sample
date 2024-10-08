@@ -19,3 +19,9 @@ class CourseIsDeletedError(BaseError):
     
 class CourseDateValidError(BaseError):
     message = 'The course must be at least 10 days long.'
+    
+class TeacherNotFoundError(BaseError):
+    message = 'Teacher do not exist to attend in course!'
+
+class ClassroomNotFoundError(BaseError):
+    message = 'Classroom do not exist to attend in course!'

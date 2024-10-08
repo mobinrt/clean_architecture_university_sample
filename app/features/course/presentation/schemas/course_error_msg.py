@@ -5,7 +5,9 @@ from app.core.error.course_exception import (
     CoursesNotFoundError,
     CourseAlreadyExistsError,
     CourseNameValidError,
-    CourseIsDeletedError
+    CourseIsDeletedError,
+    TeacherNotFoundError,
+    ClassroomNotFoundError
 )
 
 
@@ -26,3 +28,9 @@ class ErrorMSGCourseNameNotValid(BaseModel):
 
 class ErrorMSGCourseIsDeleted(BaseModel):
     detail: str = Field(example=CourseIsDeletedError.message)
+    
+class ErrorMSGTeacherNotFound(BaseModel):
+    detail: str = Field(example=TeacherNotFoundError.message)
+    
+class ErrorMSGClassroomNotFound(BaseModel):
+    detail: str = Field(example=ClassroomNotFoundError.message)
