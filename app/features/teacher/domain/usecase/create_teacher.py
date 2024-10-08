@@ -42,7 +42,6 @@ class CreateTeacherUseCaseImp(CreateTeacherUseCase):
             await self.uow.repository.create_object(new_Teacher, teacher_id)
             self.unique_id.save_to_dict(new_Teacher.name, new_Teacher.id, ObjectToSTR.TEACHER.value)
             await self.uow.commit()
-
             return ConvertTeacher.from_entity(new_Teacher)
         except Exception as e:
             await self.uow.rollback()

@@ -1,6 +1,6 @@
 import copy
 from datetime import datetime
-from typing import Any, Callable, TYPE_CHECKING
+from typing import Any, Callable, TYPE_CHECKING, Optional
 
 from app.core.error.invalid_operation_exception import InvalidOperationError
 from app.features.classroom.domain.entities.classroom_schema import ClassroomUpdate
@@ -8,14 +8,14 @@ from app.features.classroom.domain.entities.classroom_schema import ClassroomUpd
 class ClassroomEntity(object):
     def __init__(
         self,
-        id: int,
         number: int,
+        id: Optional[int] = None,
         created_at: datetime | None = None,
         updated_at: datetime | None = None,
         is_deleted: bool | None = False,
     ):
-        self.id = id
         self.number = number
+        self.id = id
         self.created_at = created_at
         self.updated_at = updated_at
         self.is_deleted = is_deleted

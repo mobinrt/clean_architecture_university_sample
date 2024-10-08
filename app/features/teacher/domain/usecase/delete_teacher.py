@@ -24,20 +24,20 @@ class DeleteTeacherUseCaseImpl(DeleteTeacherUseCase):
 
     async def __call__(self, args: Tuple[int]) -> TeacherDisplay:
         id = args[0]
-        existing_stu_db = await self.uow.repository.find_object_by_id(id)
+        existing_teacher_db = await self.uow.repository.find_object_by_id(id)
         
-        if existing_stu_db is None:
+        if existing_teacher_db is None:
             raise TeacherNotFoundError()
         
-        existing_stu_entity = self.uow.repository.to_entity(existing_stu_db)
+        existing_teacher_entity = self.uow.repository.to_entity(existing_teacher_db)
         
         try:
-            if existing_stu_db.is_deleted:
+            if existing_teacher_db.is_deleted:
                 raise TeacherIsDeleted()
                         
-            marked_stu_entity = existing_stu_entity.mark_entity_as_deleted()
-            marked_stu_db = self.uow.repository.from_entity(marked_stu_entity)
-            await self.uow.session.merge(marked_stu_db)
+            marked_teacher_entity = existing_teacher_entity.mark_entity_as_deleted()
+            marked_teacher_db = self.uow.repository.from_entity(marked_teacher_entity)
+            await self.uow.session.merge(marked_teacher_db)
             await self.uow.commit()
         except Exception as e:
             await self.uow.rollback()
@@ -45,5 +45,5 @@ class DeleteTeacherUseCaseImpl(DeleteTeacherUseCase):
         finally:
             pass
         
-        return marked_stu_db
+        return marked_teacher_db
         

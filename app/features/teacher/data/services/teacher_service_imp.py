@@ -3,7 +3,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 from typing import Sequence
 
-from app.core.error.teacher_exception import TeacherNotFoundError
 from ..model import TeacherModel
 from app.features.teacher.domain.services.teacher_service import TeacherService
 from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay

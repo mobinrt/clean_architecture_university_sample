@@ -2,7 +2,7 @@ from sqlalchemy import Integer, String, ForeignKey, Date
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.core.models.mysql.models import BaseModel
 from app.features.teacher.data.model.teacher import TeacherModel
-from app.features.classroom.data.models.classroom import ClassroomModel
+from app.features.classroom.data.model.classroom import ClassroomModel
 
 class CourseModel(BaseModel):
     __tablename__ = 'courses'

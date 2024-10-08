@@ -7,6 +7,8 @@ from app.core.util.id_manager import get_unique_id_instance
 from app.core.db.database import db
 from app.features.student.presentation.routes.students_routers import student_router
 from app.features.teacher.presentation.routes.teachers_routers import teacher_router
+from app.features.classroom.presentation.routes.classrooms_routers import classroom_router
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
@@ -42,8 +44,8 @@ app = FastAPI(lifespan=lifespan)
 
 app.include_router(student_router)
 app.include_router(teacher_router)
-#app.include_router(classroom.router)
-#app.include_router(course.router)
+app.include_router(classroom_router)
+#app.include_router(course)
 #app.include_router(athentication.router)
  
 @app.get('/')

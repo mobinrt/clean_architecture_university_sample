@@ -8,15 +8,3 @@ class TeacherUnitOfWork(AbstractUnitOfWork[TeacherRepository]):
     def __init__(self, session: Session, teacher_repository: TeacherRepository):
         self.session: Session = session
         self.repository: TeacherRepository = teacher_repository
-
-    @abstractmethod
-    async def begin(self):
-        raise NotImplementedError()
-    
-    @abstractmethod
-    async def commit(self):
-        raise NotImplementedError()
-    
-    @abstractmethod
-    async def rollback(self):
-        raise NotImplementedError()

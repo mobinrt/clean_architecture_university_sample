@@ -19,3 +19,7 @@ class AbstractUnitOfWork(ABC, Generic[_T]):
     @abstractmethod
     async def rollback(self):
         raise NotImplementedError()
+    
+    @abstractmethod
+    async def refresh(self, instance):
+        raise NotImplementedError()

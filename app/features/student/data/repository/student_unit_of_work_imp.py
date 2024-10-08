@@ -21,3 +21,6 @@ class StudentUnitOfWorkImp(StudentUnitOfWork):
 
     async def rollback(self):
         await self.session.rollback()
+        
+    async def refresh(self, instance):
+        await self.session.refresh(instance)    

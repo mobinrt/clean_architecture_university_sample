@@ -8,15 +8,5 @@ class StudentUnitOfWork(AbstractUnitOfWork[StudentRepository]):
     def __init__(self, session: Session, student_repository: StudentRepository):
         self.session: Session = session
         self.repository: StudentRepository = student_repository
-
-    @abstractmethod
-    async def begin(self):
-        raise NotImplementedError()
     
-    @abstractmethod
-    async def commit(self):
-        raise NotImplementedError()
     
-    @abstractmethod
-    async def rollback(self):
-        raise NotImplementedError()

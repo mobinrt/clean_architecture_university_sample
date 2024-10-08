@@ -6,7 +6,7 @@ _T = TypeVar('_T')
 
 class BaseRepository(ABC, Generic[_T]):
     @abstractmethod
-    async def create_object(self, entity: _T) -> _T:
+    async def create_object(self, entity: _T):
         raise NotImplementedError()
 
     @abstractmethod

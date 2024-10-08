@@ -37,10 +37,10 @@ async def get_create_student_use_case(
 async def get_student_use_case(student_service: StudentService = Depends(get_student_serivce)) -> GetStudentUsecase:
     return GetStudentUsecaseImp(student_service)
 
-def get_students_use_case(student_service: StudentService = Depends(get_student_serivce)) -> GetStudentsUsecase:
+async def get_students_use_case(student_service: StudentService = Depends(get_student_serivce)) -> GetStudentsUsecase:
     return GetStudentsUsecaseImp(student_service)
  
-def get_delete_student_use_case(
+async def get_delete_student_use_case(
     unit_of_work: StudentUnitOfWork = Depends(get_student_unit_of_work),
     unique_id: UniqueID = Depends(get_unique_id_instance)
 ) -> DeleteStudentUseCase:
