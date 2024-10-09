@@ -36,11 +36,11 @@ async def get_create_teacher_use_case(
 ) -> CreateTeacherUseCase:
     return CreateTeacherUseCaseImp(unit_of_work, unique_id)
 
-async def get_teacher_use_case(teacher_service: TeacherService = Depends(get_teacher_serivce)) -> GetTeacherUsecase:
-    return GetTeacherUsecaseImp(teacher_service)
+async def get_teacher_use_case(uow: TeacherUnitOfWork = Depends(get_teacher_unit_of_work)) -> GetTeacherUsecase:
+    return GetTeacherUsecaseImp(uow)
 
-def get_teachers_use_case(teacher_service: TeacherService = Depends(get_teacher_serivce)) -> GetTeachersUsecase:
-    return GetTeachersUsecaseImp(teacher_service)
+def get_teachers_use_case(uow: TeacherUnitOfWork = Depends(get_teacher_unit_of_work)) -> GetTeachersUsecase:
+    return GetTeachersUsecaseImp(uow)
  
 def get_delete_teacher_use_case(
     unit_of_work: TeacherUnitOfWork = Depends(get_teacher_unit_of_work),

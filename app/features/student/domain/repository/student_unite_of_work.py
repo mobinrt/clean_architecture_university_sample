@@ -5,7 +5,7 @@ from app.features.student.domain.services.student_service import StudentService
 from sqlalchemy.orm import Session
 from abc import abstractmethod
 
-class StudentUnitOfWork(AbstractUnitOfWork[StudentRepository]):
+class StudentUnitOfWork(AbstractUnitOfWork[StudentRepository, StudentService]):
     def __init__(self, session: Session, student_repository: StudentRepository, student_service: StudentService):
         self.session: Session = session
         self.repository: StudentRepository = student_repository

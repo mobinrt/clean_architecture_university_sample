@@ -21,7 +21,9 @@ class GetCourseUsecaseImp(GetCourseUsecase):
         id = args[0]
 
         try:
+            print('course')
             course = await self.uow.service.find_object_by_id(id)
+            print(course)
             if not course:
                 raise CourseNotFoundError()
             

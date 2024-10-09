@@ -10,19 +10,19 @@ from app.core.error.teacher_exception import (
 
 
 class ErrorMSGTeacherNotFound(BaseModel):
-    detail: str = Field(example=TeacherNotFoundError.message)
+    detail: str = Field(default=TeacherNotFoundError.message)
 
 
 class ErrorMSGTeachersNotFound(BaseModel):
-    detail: str = Field(example=TeachersNotFoundError.message)
+    detail: str = Field(default=TeachersNotFoundError.message)
 
 
 class ErrorMSGTeacherAlreadyExists(BaseModel):
-    detail: str = Field(example=TeacherAlreadyExistsError.message)
+    detail: str = Field(default=TeacherAlreadyExistsError.message)
 
 
 class ErrorMSGTeacherNameNotValid(BaseModel):
-    detail: str = Field(example=TeacherNameValid.message)
+    detail: str = Field(default=TeacherNameValid.message)
 
 class ErrorMSGTeacherIsDeleted(BaseModel):
-    detail: str = Field(example=TeacherIsDeleted.message)
+    detail: str = Field(default=TeacherIsDeleted.message)

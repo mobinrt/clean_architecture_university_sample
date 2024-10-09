@@ -12,16 +12,16 @@ class CourseAlreadyExistsError(BaseError):
     message = 'Course already exists'
 
 class CourseNameValidError(BaseError):
-    message = 'Course name should not be blank!'
+    message = 'Course name is invalid.'
     
 class CourseIsDeletedError(BaseError):
     message = 'Course is already marked as deleted'
     
 class CourseDateValidError(BaseError):
-    message = 'The course must be at least 10 days long.'
+    message = 'The date for the course length is invalid.'
     
 class TeacherNotFoundError(BaseError):
-    message = 'Teacher do not exist to attend in course!'
+    message = 'Teacher do not exist!'
 
 class ClassroomNotFoundError(BaseError):
-    message = 'Classroom do not exist to attend in course!'
+    message = 'Classroom do not exist!'

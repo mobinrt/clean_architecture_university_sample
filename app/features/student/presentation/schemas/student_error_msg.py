@@ -10,19 +10,19 @@ from app.core.error.student_exception import (
 
 
 class ErrorMSGStudentNotFound(BaseModel):
-    detail: str = Field(example=StudentNotFoundError.message)
+    detail: str = Field(default=StudentNotFoundError.message)
 
 
 class ErrorMSGStudentsNotFound(BaseModel):
-    detail: str = Field(example=StudentsNotFoundError.message)
+    detail: str = Field(default=StudentsNotFoundError.message)
 
 
 class ErrorMSGStudentAlreadyExists(BaseModel):
-    detail: str = Field(example=StudentAlreadyExistsError.message)
+    detail: str = Field(default=StudentAlreadyExistsError.message)
 
 
 class ErrorMSGStudentNameNotValid(BaseModel):
-    detail: str = Field(example=StudentNameValidError.message)
+    detail: str = Field(default=StudentNameValidError.message)
 
 class ErrorMSGStudentIsDeleted(BaseModel):
-    detail: str = Field(example=StudentIsDeletedError.message)
+    detail: str = Field(default=StudentIsDeletedError.message)

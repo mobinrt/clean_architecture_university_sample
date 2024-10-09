@@ -35,11 +35,11 @@ async def get_create_course_use_case(
 ) -> CreateCourseUseCase:
     return CreateCourseUseCaseImp(unit_of_work, unique_id)
 
-async def get_course_use_case(course_service: CourseService = Depends(get_course_service)) -> GetCourseUsecase:
-    return GetCourseUsecaseImp(course_service)
+async def get_course_use_case(uow: CourseUnitOfWork = Depends(get_course_unit_of_work)) -> GetCourseUsecase:
+    return GetCourseUsecaseImp(uow)
 
-async def get_courses_use_case(course_service: CourseService = Depends(get_course_service)) -> GetCoursesUsecase:
-    return GetCoursesUsecaseImp(course_service)
+async def get_courses_use_case(uow: CourseUnitOfWork = Depends(get_course_unit_of_work)) -> GetCoursesUsecase:
+    return GetCoursesUsecaseImp(uow)
 
 async def get_delete_course_use_case(
     unit_of_work: CourseUnitOfWork = Depends(get_course_unit_of_work),

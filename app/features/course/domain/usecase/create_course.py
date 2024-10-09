@@ -36,11 +36,11 @@ class CreateCourseUseCaseImp(CreateCourseUseCase):
         if data.end - data.start < timedelta(days=10):
             raise CourseDateValidError()
         
-        teacher = await self.uow.repository.find_object_by_id_filter_model(data.teacher_id, TeacherModel)
+        teacher = await self.uow.service.find_teacher_by_id(data.teacher_id)
         if not teacher:
             raise TeacherNotFoundError()
         
-        classroom = await self.uow.repository.find_object_by_id_filter_model(data.class_id, ClassroomModel)
+        classroom = await self.uow.service.find_classroom_by_number(data.class_id)
         if not classroom:
             raise ClassroomNotFoundError()
         

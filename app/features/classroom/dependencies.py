@@ -33,11 +33,11 @@ async def get_create_classroom_use_case(
 ) -> CreateClassroomUseCase:
     return CreateClassroomUseCaseImp(unit_of_work)
 
-async def get_classroom_use_case(classroom_service: ClassroomService = Depends(get_classroom_serivce)) -> GetClassroomUsecase:
-    return GetClassroomUsecaseImp(classroom_service)
+async def get_classroom_use_case(uow: ClassroomUnitOfWork = Depends(get_classroom_unit_of_work)) -> GetClassroomUsecase:
+    return GetClassroomUsecaseImp(uow)
 
-async def get_classrooms_use_case(classroom_service: ClassroomService = Depends(get_classroom_serivce)) -> GetClassroomsUsecase:
-    return GetClassroomsUsecaseImp(classroom_service)
+async def get_classrooms_use_case(uow: ClassroomUnitOfWork = Depends(get_classroom_unit_of_work)) -> GetClassroomsUsecase:
+    return GetClassroomsUsecaseImp(uow)
  
 async def get_delete_classroom_use_case(
     unit_of_work: ClassroomUnitOfWork = Depends(get_classroom_unit_of_work),

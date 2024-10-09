@@ -13,7 +13,7 @@ class CourseModel(BaseModel):
     end: Mapped[Date] = mapped_column(Date)
     
     teacher_id = mapped_column(Integer, ForeignKey('teachers.id'))
-    class_id = mapped_column(Integer, ForeignKey('classes.id'))
+    class_id = mapped_column(Integer, ForeignKey('classes.number'))
 
     students = relationship('StudentModel', secondary='student_course', back_populates='courses')
     

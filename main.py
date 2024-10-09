@@ -10,13 +10,27 @@ from app.features.teacher.presentation.routes.teachers_routers import teacher_ro
 from app.features.classroom.presentation.routes.classrooms_routers import classroom_router
 from app.features.course.presentation.routes.courses_routers import course_router
 
+'''
+logging.basicConfig(
+    level=logging.DEBUG,  # You can set to DEBUG to capture more detailed logs
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("app_errors.log"),  # Log to app_errors.log
+        logging.StreamHandler()  # Also log to terminal
+    ]
+)
+
+logger = logging.getLogger(__name__)
+'''
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
         async with db.engine.begin() as conn:
             await conn.run_sync(db.Base.metadata.create_all)
         
-        print("Start the app")
+        print("App started successfully")
+        
         print("Registered routes:")
         for route in app.routes:
             print(route.path)
@@ -24,6 +38,7 @@ async def lifespan(app: FastAPI):
         app.state.unique_id = await get_unique_id_instance()
         try:
             app.state.unique_id.load_from_file('unique_id_state.json')
+            print("Loaded unique ID state successfully")
         except Exception as e:
             print(f"Error loading unique_id_state.json: {e}")
             raise
@@ -38,6 +53,7 @@ async def lifespan(app: FastAPI):
         try:
             if app.state.unique_id:
                 app.state.unique_id.save_to_file('unique_id_state.json')
+                print("Saved unique ID state successfully")
         except Exception as e:
             print(f"Error saving unique_id_state.json: {e}")
 

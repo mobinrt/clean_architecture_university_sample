@@ -26,11 +26,6 @@ class CourseRepositoryImp(CourseRepository):
         self.session.add(model_instance)
         return self.to_entity(model_instance)
     
-    async def find_object_by_id_filter_model(self, object_id: int, model: Type[_MODEL]) -> _MODEL:
-        result = await self.session.execute(select(model).filter(model.id == object_id))
-        model_instance = result.scalars().first()
-        return self.to_entity(model_instance)
-
     '''
     async def delete_mark(self, id: int) -> CourseEntity | None:
         existing_course_entity = await self.find_object_by_id(id)
