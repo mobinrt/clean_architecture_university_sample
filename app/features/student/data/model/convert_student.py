@@ -1,7 +1,7 @@
 from . import StudentModel
 from app.core.models.convert_entity import ConvertEntity
 from app.features.student.domain.entities.student_entity import StudentEntity
-from app.features.student.domain.entities.student_schema import StudentDisplay
+from app.features.student.domain.entities.student_schema import StudentDisplay, StudentUpdate
 
 class ConvertStudent(ConvertEntity):
     
@@ -51,3 +51,17 @@ class ConvertStudent(ConvertEntity):
             updated_at=student_entity.updated_at,
             is_deleted=student_entity.is_deleted
         )
+
+    @staticmethod
+    def updated_model(student_update: StudentUpdate, current_user: StudentEntity) -> StudentEntity:
+        student = StudentEntity(
+            id=current_user.id,
+            name=student_update.name, 
+            password=student_update.password,
+            major=current_user.major,  
+            created_at=current_user.created_at,  
+            updated_at=current_user.updated_at,
+            is_deleted=current_user.is_deleted  
+        )
+        
+        return student

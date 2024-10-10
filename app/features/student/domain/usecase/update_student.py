@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import cast, Tuple, Optional
+from typing import cast, Tuple
 
 from app.core.error.auth_exceptions import AuthErrorForUser
 from app.core.use_cases.use_case import BaseUseCase
@@ -7,6 +7,8 @@ from app.features.student.domain.entities.student_schema import StudentUpdate, S
 from app.features.student.domain.repository.student_unit_of_work import StudentUnitOfWork
 from app.features.student.domain.auth.auth_student import StudentAuthService
 from app.features.student.data.model.convert_student import ConvertStudent
+from app.core.util import hash 
+
 
 class UpdateStudentUseCase(BaseUseCase[Tuple[str, StudentUpdate], StudentDisplay]):
     uow: StudentUnitOfWork
@@ -30,10 +32,14 @@ class UpdateStudentUseCaseImp(UpdateStudentUseCase):
         if current_user is None:
             raise AuthErrorForUser()
         
+        update_student.password = hash.get_password_hash(update_student.password) if update_student.password else current_user.password
+        update_entity = ConvertStudent.updated_model(update_student, current_user)
+        current_entity = ConvertStudent.to_entity(current_user)
+        
         try:
-            updated = await self.uow.repository.update_obj(update_student, current_user)
+            updated = await self.uow.repository.update_obj(update_entity, current_entity)
             await self.uow.commit()
             
-            return ConvertStudent.from_entity(updated)
+            return updated
         except Exception as e:
             raise e

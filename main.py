@@ -9,6 +9,7 @@ from app.features.student.presentation.routes.students_routers import student_ro
 from app.features.teacher.presentation.routes.teachers_routers import teacher_router
 from app.features.classroom.presentation.routes.classrooms_routers import classroom_router
 from app.features.course.presentation.routes.courses_routers import course_router
+from app.features.auth.presentation.routers.get_token import router as auth_router
 
 '''
 logging.basicConfig(
@@ -63,7 +64,7 @@ app.include_router(student_router)
 app.include_router(teacher_router)
 app.include_router(classroom_router)
 app.include_router(course_router)
-#app.include_router(athentication.router)
+app.include_router(auth_router)
  
 @app.get('/')
 def start():

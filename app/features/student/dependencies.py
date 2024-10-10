@@ -16,6 +16,7 @@ from app.features.student.domain.usecase.hash_table_student import GetHashTableF
 from app.features.student.domain.usecase.update_student import UpdateStudentUseCase, UpdateStudentUseCaseImp
 from app.features.student.domain.usecase.delete_student import DeleteStudentUseCase, DeleteStudentUseCaseImpl
 from app.features.student.domain.auth.auth_student import StudentAuthService
+from app.features.student.data.model import StudentModel
 
 async def get_student_repository(session: Session = Depends(db.get_session)) -> StudentRepository:
     return StudentRepositoryImp(session)
@@ -26,7 +27,7 @@ async def get_student_serivce(session: Session = Depends(db.get_session)) -> Stu
 
 
 async def get_auth_service(session: Session = Depends(db.get_session)) -> StudentAuthService:
-    return StudentAuthService(session)
+    return StudentAuthService(session, StudentModel)
 
 
 async def get_student_unit_of_work(

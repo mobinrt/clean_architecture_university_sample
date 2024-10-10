@@ -39,17 +39,12 @@ class EntityRepo(BaseRepository[TEntity]):
         return [self.to_entity(model_instance) for model_instance in model_instances]
 
     async def update_obj(self, update_obj: TEntity, current_obj: TEntity) -> TEntity:
-        current_model = self.from_entity(current_obj)
-        update_data = self.from_entity(update_obj)
-
-        for var, value in vars(update_data).items():
+        for var, value in vars(update_obj).items():
             if value is not None:
-                if var == 'password':
-                    value = hash.get_password_hash(value)
-                setattr(current_model, var, value) if value else None
-
-        self.session.add(current_model)
-        return self.to_entity(current_model)
+                setattr(current_obj, var, value) if value else None
+        
+        await self.session.merge(current_obj)
+        return current_obj
 
     async def delete_by_id(self, object_id: int) -> TEntity:
         model_instance = await self.find_object_by_id(object_id)

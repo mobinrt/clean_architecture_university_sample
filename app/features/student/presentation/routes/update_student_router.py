@@ -24,14 +24,10 @@ async def update_student(
     update_student_use_case: UpdateStudentUseCase = Depends(get_update_student_use_case)
 ):
     try:
-        student = update_student_use_case((token, data))
+        student = await update_student_use_case((token, data))
     except AuthErrorForUser:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED
         )
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
+    
     return student

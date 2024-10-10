@@ -7,3 +7,11 @@ class TokenDisplay(BaseModel):
     model_config = {
         'from_attributes': True
     }
+    
+class UserDisplay(BaseModel):
+    id: int
+    name: str
+    
+    model_config = {
+        'from_attributes': True
+    }  
