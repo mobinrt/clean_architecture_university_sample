@@ -48,11 +48,11 @@ class UpdateTeacherUseCaseImp(UpdateTeacherUseCase):
         
         try:
             updated = await self.uow.repository.update_obj(update_entity, current_entity)
-            print(updated.name)
+            
             self.unique_id.update_name(ObjectToSTR.TEACHER.value, updated.id, updated.name)
             
             await self.uow.commit()
             
             return updated
-        except Exception as e:
+        except Exception as e: 
             raise e

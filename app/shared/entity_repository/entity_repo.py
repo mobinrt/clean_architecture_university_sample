@@ -46,7 +46,7 @@ class EntityRepo(BaseRepository[TEntity]):
                 
         current_obj.updated_at = datetime.utcnow()
 
-        #await self.session.merge(current_obj)
+        await self.session.merge(self.from_entity(current_obj))
         return self.to_entity(current_obj)
 
     async def delete_by_id(self, object_id: int) -> TEntity:

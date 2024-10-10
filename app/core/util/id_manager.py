@@ -42,9 +42,11 @@ class UniqueID(metaclass=SingletonMeta):
 
 
     def update_name(self, id_type: str, id: int, new_name: str):
-        if self.find_by_id(id_type, id) is not None:
+        id = str(id)
+        found_item = self.find_by_id(id_type, id)
+        if found_item:
             self.table[id_type][id] = new_name
-            return True
+            return True    
         return False
 
     
@@ -55,6 +57,7 @@ class UniqueID(metaclass=SingletonMeta):
                 self.table = data.get('table', self.table)
         except (FileNotFoundError, json.JSONDecodeError) as e:
             print(f"Error loading file: {e}")
+
 
     def save_to_file(self, file_path: str):
         try: 
