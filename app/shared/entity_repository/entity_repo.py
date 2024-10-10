@@ -49,7 +49,6 @@ class EntityRepo(BaseRepository[TEntity]):
                 setattr(current_model, var, value) if value else None
 
         self.session.add(current_model)
-        self.session.commit()
         return self.to_entity(current_model)
 
     async def delete_by_id(self, object_id: int) -> TEntity:

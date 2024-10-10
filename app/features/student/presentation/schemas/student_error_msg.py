@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 
+from app.core.error.auth_exceptions import AuthErrorForUser
 from app.core.error.student_exception import (
     StudentNotFoundError,
     StudentsNotFoundError,
@@ -26,3 +27,6 @@ class ErrorMSGStudentNameNotValid(BaseModel):
 
 class ErrorMSGStudentIsDeleted(BaseModel):
     detail: str = Field(default=StudentIsDeletedError.message)
+    
+class ErrorMSGInvalidAuth(BaseModel):
+    detail: str = Field(default=AuthErrorForUser.message)

@@ -4,7 +4,8 @@ from typing import Sequence
 from app.core.use_cases.use_case import BaseUseCase
 from app.core.error.student_exception import StudentsNotFoundError
 from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.domain.repository.student_unite_of_work import StudentUnitOfWork
+from app.features.student.domain.repository.student_unit_of_work import StudentUnitOfWork
+from app.features.student.data.model.convert_student import ConvertStudent
 
 class GetStudentsUsecase(BaseUseCase[None, Sequence[StudentDisplay]]):       #use Tuple or not??
     uow: StudentUnitOfWork

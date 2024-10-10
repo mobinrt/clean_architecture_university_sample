@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, status, Response, Request
+from fastapi import Depends, HTTPException, status
 
 from app.core.error.student_exception import StudentNameValidError
 from app.features.student.dependencies import get_create_student_use_case

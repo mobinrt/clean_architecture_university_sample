@@ -4,7 +4,6 @@ from app.core.error.base_exception import BaseError
 class CourseNotFoundError(BaseError):
     message = 'Course does not exist.'
 
-
 class CoursesNotFoundError(BaseError):
     message = 'Courses do not exist'
 

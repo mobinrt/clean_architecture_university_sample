@@ -4,7 +4,8 @@ from typing import Tuple
 from app.core.use_cases.use_case import BaseUseCase
 from app.core.error.student_exception import StudentNotFoundError
 from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.domain.repository.student_unite_of_work import StudentUnitOfWork
+from app.features.student.domain.repository.student_unit_of_work import StudentUnitOfWork
+from app.features.student.data.model.convert_student import ConvertStudent
 
 class GetStudentUsecase(BaseUseCase[Tuple[int], StudentDisplay]):       #use Tuple or not??
     uow: StudentUnitOfWork
@@ -25,6 +26,6 @@ class GetStudentUsecaseImp(GetStudentUsecase):
             if not student:
                 raise StudentNotFoundError()
             
-            return student
+            return ConvertStudent.from_entity(student)
         except Exception as e:
             raise e

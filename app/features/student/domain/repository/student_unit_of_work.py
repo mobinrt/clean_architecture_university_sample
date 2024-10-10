@@ -3,7 +3,6 @@ from app.features.student.domain.repository.student_repo import StudentRepositor
 from app.features.student.domain.services.student_service import StudentService
 
 from sqlalchemy.orm import Session
-from abc import abstractmethod
 
 class StudentUnitOfWork(AbstractUnitOfWork[StudentRepository, StudentService]):
     def __init__(self, session: Session, student_repository: StudentRepository, student_service: StudentService):

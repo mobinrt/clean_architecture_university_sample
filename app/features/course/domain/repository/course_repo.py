@@ -1,4 +1,4 @@
-from app.entity_repository.entity_repo import EntityRepo
+from app.shared.entity_repository.entity_repo import EntityRepo
 from app.features.course.domain.entities.course_entity import CourseEntity  
 
 

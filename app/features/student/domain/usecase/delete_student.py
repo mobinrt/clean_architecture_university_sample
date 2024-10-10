@@ -5,7 +5,7 @@ from app.core.use_cases.use_case import BaseUseCase
 from app.core.util.id_manager import UniqueID
 from app.features.student.domain.entities.student_entity import StudentEntity
 from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.domain.repository.student_unite_of_work import StudentUnitOfWork
+from app.features.student.domain.repository.student_unit_of_work import StudentUnitOfWork
 from app.core.enum.object_type_str import ObjectToSTR
 from app.core.error.student_exception import StudentNotFoundError, StudentIsDeletedError
 from app.features.student.data.model.convert_student import ConvertStudent
@@ -45,5 +45,6 @@ class DeleteStudentUseCaseImpl(DeleteStudentUseCase):
         finally:
             pass
         
-        return marked_stu_db
+        return ConvertStudent.from_entity(marked_stu_db)
+         
         

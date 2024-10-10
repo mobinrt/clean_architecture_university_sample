@@ -6,7 +6,7 @@ from app.core.util.id_manager import UniqueID
 from app.features.student.domain.entities.student_schema import StudentCreate
 from app.features.student.domain.entities.student_entity import StudentEntity
 from app.features.student.domain.entities.student_schema import StudentDisplay
-from app.features.student.domain.repository.student_unite_of_work import StudentUnitOfWork
+from app.features.student.domain.repository.student_unit_of_work import StudentUnitOfWork
 from app.core.enum.object_type_digit import ObjectDigits
 from app.core.enum.object_type_str import ObjectToSTR
 from app.core.util import hash
