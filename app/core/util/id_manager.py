@@ -1,17 +1,12 @@
 import random
 import json
 
-class UniqueID:
-    _instance = None
+from .singelton_meta import SingletonMeta
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(UniqueID, cls).__new__(cls, *args, **kwargs)
-            cls._instance.__initialized = False
-        return cls._instance
 
+class UniqueID(metaclass=SingletonMeta):
     def __init__(self):
-        if self.__initialized:
+        if hasattr(self, '__initialized') and self.__initialized:
             return
         self.table = {
             'student': {},
@@ -19,7 +14,7 @@ class UniqueID:
             'course': {}
         }
         self.__initialized = True     
-            
+
     def generate_unique_id(self, num_digits: int, id_type: str):
         lower_bound = 10**(num_digits - 1)
         upper_bound = 10**num_digits - 1
@@ -41,6 +36,18 @@ class UniqueID:
     def get_table(self, id_type: str):
         return self.table[id_type]
     
+    
+    def find_by_id(self, id_type: str, id: int):
+        return self.table.get(id_type, {}).get(id, None)
+
+
+    def update_name(self, id_type: str, id: int, new_name: str):
+        if self.find_by_id(id_type, id) is not None:
+            self.table[id_type][id] = new_name
+            return True
+        return False
+
+    
     def load_from_file(self, file_path: str):
         try:
             with open(file_path, 'r') as file:
@@ -57,7 +64,7 @@ class UniqueID:
                 }, file, indent=4)
         except IOError as e:
             print(f"Error writing JSON file: {e}")
-    
+
 unique_id_instance = UniqueID()
 
 async def get_unique_id_instance():       

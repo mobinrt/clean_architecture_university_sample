@@ -1,7 +1,7 @@
 from .teacher import TeacherModel
 from app.core.models.convert_entity import ConvertEntity
 from app.features.teacher.domain.entities.teacher_entity import TeacherEntity
-from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
+from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay, TeacherUpdate
 class ConvertTeacher(ConvertEntity):
     
     @staticmethod
@@ -46,3 +46,15 @@ class ConvertTeacher(ConvertEntity):
             updated_at=teacher_entity.updated_at,
             is_deleted=teacher_entity.is_deleted
         )
+
+    @staticmethod
+    def updated_model(teacher_update: TeacherUpdate, current_user: TeacherEntity) -> TeacherEntity:
+        model = TeacherEntity(
+            id=current_user.id,
+            name=teacher_update.name, 
+            password=teacher_update.password,
+            created_at=current_user.created_at,  
+            updated_at=current_user.updated_at,
+            is_deleted=current_user.is_deleted  
+        )
+        return model

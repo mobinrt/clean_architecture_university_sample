@@ -68,6 +68,7 @@ async def get_hash_table_use_case(
 
 def get_update_student_use_case(
     unit_of_work: StudentUnitOfWork = Depends(get_student_unit_of_work),
-    auth: StudentAuthService = Depends(get_auth_service)
+    auth: StudentAuthService = Depends(get_auth_service),
+    unique_id: UniqueID = Depends(get_unique_id_instance)
     ) -> UpdateStudentUseCase:
-    return UpdateStudentUseCaseImp(unit_of_work, auth)
+    return UpdateStudentUseCaseImp(unit_of_work, auth, unique_id)

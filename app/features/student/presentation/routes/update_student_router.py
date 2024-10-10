@@ -9,7 +9,7 @@ from app.features.student.presentation.schemas.student_error_msg import ErrorMSG
 from app.features.auth.data.service import oauth2_sc
 
 @router.put(
-    '/update/current_student/',
+    '/update/student/',
     response_model=StudentDisplay,
     status_code=status.HTTP_200_OK,
     responses={
@@ -28,6 +28,11 @@ async def update_student(
     except AuthErrorForUser:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED
+        )
+    except Exception as _e:
+        print(_e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
     
     return student

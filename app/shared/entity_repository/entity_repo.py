@@ -2,6 +2,7 @@ from typing import Type, TypeVar, List, Optional
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from abc import abstractmethod
+from datetime import datetime
 
 from app.core.models.mysql.models import BaseModel
 from app.core.repositories.base_repository import BaseRepository
@@ -42,9 +43,11 @@ class EntityRepo(BaseRepository[TEntity]):
         for var, value in vars(update_obj).items():
             if value is not None:
                 setattr(current_obj, var, value) if value else None
-        
-        await self.session.merge(current_obj)
-        return current_obj
+                
+        current_obj.updated_at = datetime.utcnow()
+
+        #await self.session.merge(current_obj)
+        return self.to_entity(current_obj)
 
     async def delete_by_id(self, object_id: int) -> TEntity:
         model_instance = await self.find_object_by_id(object_id)

@@ -5,7 +5,7 @@ from app.core.use_cases.use_case import BaseUseCase
 from app.core.util.id_manager import UniqueID
 from app.features.teacher.domain.entities.teacher_schema import TeacherCreate, TeacherDisplay
 from app.features.teacher.domain.entities.teacher_entity import TeacherEntity
-from app.features.teacher.domain.repository.teacher_unite_of_work import TeacherUnitOfWork
+from app.features.teacher.domain.repository.teacher_unit_of_work import TeacherUnitOfWork
 from app.core.enum.object_type_digit import ObjectDigits
 from app.core.enum.object_type_str import ObjectToSTR
 from app.core.util import hash

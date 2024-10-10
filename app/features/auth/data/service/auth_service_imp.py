@@ -48,6 +48,7 @@ class AuthServiceImp(AuthService[_MODEL], Generic[_MODEL]):
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
             user_id = payload.get("sub")
+
             user_type = payload.get("type")
             if not user_id or not user_type:
                 raise AuthErrorForUser()
@@ -57,10 +58,9 @@ class AuthServiceImp(AuthService[_MODEL], Generic[_MODEL]):
         if user_type == "student":
             user = await self.get_user_by_id(user_id, StudentModel)
         elif user_type == "teacher":
-            user =await self.get_user_by_id(user_id, TeacherModel)
+            user = await self.get_user_by_id(user_id, TeacherModel)
         else:
             user = None
-            
         if not user:
             raise AuthErrorForUser()
 

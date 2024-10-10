@@ -4,7 +4,7 @@ from typing import Sequence
 from app.core.use_cases.use_case import BaseUseCase
 from app.core.error.teacher_exception import TeachersNotFoundError
 from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
-from app.features.teacher.domain.repository.teacher_unite_of_work import TeacherUnitOfWork
+from app.features.teacher.domain.repository.teacher_unit_of_work import TeacherUnitOfWork
 
 class GetTeachersUsecase(BaseUseCase[None, Sequence[TeacherDisplay]]):       #use Tuple or not??
     uow: TeacherUnitOfWork

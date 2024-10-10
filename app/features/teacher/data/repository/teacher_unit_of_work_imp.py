@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.features.teacher.domain.repository.teacher_repo import TeacherRepository
-from app.features.teacher.domain.repository.teacher_unite_of_work import TeacherUnitOfWork
+from app.features.teacher.domain.repository.teacher_unit_of_work import TeacherUnitOfWork
 from app.features.teacher.domain.services.teacher_service import TeacherService
 
 class TeacherUnitOfWorkImp(TeacherUnitOfWork):

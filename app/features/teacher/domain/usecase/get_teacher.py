@@ -4,7 +4,7 @@ from typing import Tuple
 from app.core.use_cases.use_case import BaseUseCase
 from app.core.error.teacher_exception import TeacherNotFoundError
 from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
-from app.features.teacher.domain.repository.teacher_unite_of_work import TeacherUnitOfWork
+from app.features.teacher.domain.repository.teacher_unit_of_work import TeacherUnitOfWork
 
 class GetTeacherUsecase(BaseUseCase[Tuple[int], TeacherDisplay]):
     uow: TeacherUnitOfWork
