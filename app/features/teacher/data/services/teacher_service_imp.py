@@ -7,6 +7,8 @@ from ..model import TeacherModel
 from app.features.teacher.domain.services.teacher_service import TeacherService
 from app.features.teacher.domain.entities.teacher_schema import TeacherDisplay
 from app.features.teacher.data.model.convert_teacher import ConvertTeacher
+from app.features.course.data.model import CourseModel
+
 
 class TeacherServiceImp(TeacherService):
     
@@ -25,3 +27,14 @@ class TeacherServiceImp(TeacherService):
         result = await self.session.execute(select(TeacherModel))
         model_instances = result.scalars().all()
         return [self.to_read_model(model_instance) for model_instance in model_instances]
+
+    
+    async def find_courses_by_teacher_id(self, teacher_id: int) -> Sequence[CourseModel]:
+        query = await self.session.execute(
+            select(CourseModel)
+            .where(CourseModel.teacher_id == teacher_id)
+            .where(CourseModel.is_deleted == False)
+            )
+        
+        courses = query.scalars().all()
+        return courses

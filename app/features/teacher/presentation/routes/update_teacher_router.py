@@ -28,5 +28,10 @@ async def update_teacher(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED
         )
+    except Exception as _e:
+        print(_e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
     
     return teacher
